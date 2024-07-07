@@ -56,3 +56,5 @@ def products():
     print(alltodos) # this prints according to __repr__
     return render_template('this is products page')
 
+if __name__ == "__main__":
+    app.run(debug=True)
