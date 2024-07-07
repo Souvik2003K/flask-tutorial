@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %} Home {% endblock title %}
+
+{% block body %}
+    
+
+    <!-- form -->
+    <div class="container my-5">
+        <h2 class="mb-3">Add TODOs</h2>
+        <form action='/' method='POST'>
+            <div class="mb-3">
+                <label for="title" class="form-label">TODO title</label>
+                <input type="text" class="form-control" name="title" id="title" aria-describedby="emailHelp">
+                </div>
+            <div class="mb-3">
+                <label for="desc" class="form-label">TODO Description</label>
+                <input type="text" class="form-control" name="desc" id="desc">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+    <!-- table -->
+    <div class="container my-5">
+        <h2 class="mb-3">Your TODOs</h2>
+        {% if alltodos|length==0 %}
+            <tr>
+                <td colspan="5" class="text-center">
+                    <div class="alert alert-warning" role="alert">
+                        <h4>No TODOs added yet</h4>
+                    </div>
+                </td>
+            </tr>
+            
+        {% else %}
+        
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Sno.</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Desc</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for todos in alltodos %}
+            <tr>
+                <th scope="row">{{loop.index}}</th>
+                <td>{{todos.title}}</td>
+                <td>{{todos.desc}}</td>
+                <td>{{todos.data_created}}</td>
+                <td>
+                    <a href="/update/{{todos.sno}}" type="button" class="btn btn-outline-info btn-sm mx-1">update</a>
+                    <a href="/delete/{{todos.sno}}" type="button" class="btn btn-outline-danger btn-sm mx-1">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+{% endblock body %}
