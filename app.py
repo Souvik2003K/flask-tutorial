@@ -57,4 +57,4 @@ def products():
     return render_template('this is products page')
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
